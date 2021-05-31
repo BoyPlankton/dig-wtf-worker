@@ -12,7 +12,7 @@ async function dnsRequest(name, type) {
 
 const handleRequest = async event => {
 	// getting the hostname from the path
-	// https://dig.wtf/v3/d/hostname/
+	// dig.wtf/v3/hostname/
 	const url = new URL(event.request.url);
 	const name = url.pathname.split("/")[2];
 
@@ -115,13 +115,12 @@ const handleRequest = async event => {
 	//https://developers.cloudflare.com/workers/platform/limits#cpu-runtime
 	//You can only have 6 simultaneous calls
 	const answers = await Promise.all([
-		fetch("https://cloudflare-dns.com/dns-query?name=" + name + "&type=A&ct=application/dns-json"),
-		fetch("https://cloudflare-dns.com/dns-query?name=" + name + "&type=AAAA&ct=application/dns-json"),
-		//fetch("https://cloudflare-dns.com/dns-query?name=" + name + "&type=CNAME&ct=application/dns-json"),
-		fetch("https://cloudflare-dns.com/dns-query?name=" + name + "&type=NS&ct=application/dns-json"),
-		fetch("https://cloudflare-dns.com/dns-query?name=" + name + "&type=MX&ct=application/dns-json"),
-		fetch("https://cloudflare-dns.com/dns-query?name=" + name + "&type=TXT&ct=application/dns-json"),
-		fetch("https://cloudflare-dns.com/dns-query?name=" + name + "&type=SOA&ct=application/dns-json")
+		dnsRequest(name, "A"),
+		dnsRequest(name, "AAAA"),
+		dnsRequest(name, "NS"),
+		dnsRequest(name, "MX"),
+		dnsRequest(name, "TXT"),
+		dnsRequest(name, "SOA")
 	]).then(function (responses) {
 		// Get a JSON object from each of the responses
 		return Promise.all(responses.map(function (response) {
