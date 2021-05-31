@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "name": "dig-wtf-worker",
+  "version": "1.0.0",
+  "description": "A Cloudflare Worker for getting DNS results",
+  "main": "index.js",
+  "scripts": {
+  },
+  "author": "Vincent Marcus <boyplankton@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+  }
+}

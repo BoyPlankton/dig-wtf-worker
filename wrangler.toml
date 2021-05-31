@@ -1,0 +1,9 @@
+name = "dig-wtf-worker"
+type = "javascript"
+
+account_id = "463d5e625b8b6f08067193c41a3345a4"
+workers_dev = true
+
+[env.production]
+route = "*dig.wtf/v3/*"
+zone_id = "f70246918a75508e7794e2d3e7b8e3c1"
