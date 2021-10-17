@@ -123,7 +123,7 @@ const handleRequest = async event => {
 		dnsRequest(name, "SOA")
 	]).then(function (responses) {
 		return responses.push.apply(
-			await Promise.all([
+			Promise.all([
 				dnsRequest(name, "PTR"),
 				dnsRequest(name, "SRV"),
 				dnsRequest(name, "CNAME")
