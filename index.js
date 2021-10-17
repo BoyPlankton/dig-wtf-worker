@@ -129,7 +129,7 @@ const handleRequest = async event => {
 				dnsRequest(name, "CNAME")
 			])
 		)
-	).then(function (responses) {
+	}).then(function (responses) {
 		// Get a JSON object from each of the responses
 		return Promise.all(responses.map(function (response) {
 			return response.json();
