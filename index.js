@@ -122,6 +122,14 @@ const handleRequest = async event => {
 		dnsRequest(name, "TXT"),
 		dnsRequest(name, "SOA")
 	]).then(function (responses) {
+		return responses.push.apply(
+			await Promise.all([
+				dnsRequest(name, "PTR"),
+				dnsRequest(name, "SRV"),
+				dnsRequest(name, "CNAME")
+			])
+		)
+	}).then(function (responses) {
 		// Get a JSON object from each of the responses
 		return Promise.all(responses.map(function (response) {
 			return response.json();
